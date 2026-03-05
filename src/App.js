@@ -1,5 +1,6 @@
-import './App.css';
-import QuizEditor from './components/QuizEditor';
+import "./App.css";
+import QuizEditor from "./components/QuizEditor";
+import "./styles/global.scss";
 
 function App() {
   return (

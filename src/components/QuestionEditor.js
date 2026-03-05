@@ -43,22 +43,26 @@ class QuestionEditor extends React.Component {
     render(){
         const {question} = this.props;
         return (
-            <div style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
-                <h3>Question Editor</h3>
+            <div className="card">
+                <h3>Question</h3>
+
+                <label>Name</label>
                 <input 
                 name="name"
                 placeholder="Question name" 
                 value={question.name}
                 onChange={this.handleChange}
                 />
-                <br/>
+                
+                <label>Description</label>
                 <input
                 name="description"
                 placeholder="Question description"
                 value={question.description}
                 onChange={this.handleChange}
                 />
-                <br/>
+                
+                <label>Sort Order</label>
                 <input 
                 name="sortOrder"
                 type="number"
@@ -66,8 +70,8 @@ class QuestionEditor extends React.Component {
                 value={question.sortOrder}
                 onChange={this.handleChange}
                 />
-                <h4>Options</h4>
 
+                <h4>Options</h4>
                 {
                     question.options.map((o,i)=>(
                         <OptionEditor
@@ -79,6 +83,7 @@ class QuestionEditor extends React.Component {
                         />
                     ))
                 }
+                
                 <button onClick={this.addOption}>
                    Add Option 
                 </button>

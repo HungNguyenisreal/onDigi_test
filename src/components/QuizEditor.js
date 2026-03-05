@@ -96,38 +96,49 @@ class QuizEditor extends React.Component {
   render() {
     const { quiz } = this.state;
     return (
-      <div>
-        <h2>Quiz Information</h2>
+      <div className="container">
+        <div className="card">
+          <h2>Quiz Information</h2>
 
-        <input
-          name="name"
-          placeholder="Quiz name"
-          value={quiz.name}
-          onChange={this.handleQuizChange}
-        />
-        <br />
-        <textarea
-          name="description"
-          placeholder="Quiz description"
-          value={quiz.description}
-          onChange={this.handleQuizChange}
-        />
-        <h2>Questions</h2>
-
-        {quiz.questions.map((q, index) => (
-          <QuestionEditor
-            key={index}
-            question={q}
-            onChange={(question) => this.updateQuestion(index, question)}
+          <label>Quiz Name</label>
+          <input
+            name="name"
+            placeholder="Quiz name"
+            value={quiz.name}
+            onChange={this.handleQuizChange}
           />
-        ))}
-        <br />
-        <button onClick={this.addQuestion}>Add Question</button>
-        <br />
-        <button onClick={this.exportJSON}>Export JSON</button>
-        <br />
-        <input type="file" accept=".json" onChange={this.handleImport} />
-        <p>Selected file: {this.state.fileName}</p>
+
+          <label>Description</label>
+          <textarea
+            name="description"
+            placeholder="Quiz description"
+            value={quiz.description}
+            onChange={this.handleQuizChange}
+          />
+        </div>
+
+        <div className="card">
+          <h2>Questions</h2>
+
+          {quiz.questions.map((q, index) => (
+            <QuestionEditor
+              key={index}
+              question={q}
+              onChange={(question) => this.updateQuestion(index, question)}
+            />
+          ))}
+          <br />
+          <button onClick={this.addQuestion}>Add Question</button>
+        </div>
+        <div className="card">
+          <button onClick={this.exportJSON} style={{ marginBottom: "10px" }}>
+            Export JSON
+          </button>
+        </div>
+        <div className="card">
+          <h4>Import JSON</h4>
+          <input type="file" accept=".json" onChange={this.handleImport} />
+        </div>
       </div>
     );
   }
