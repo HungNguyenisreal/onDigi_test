@@ -28,7 +28,8 @@ class QuizEditor extends React.Component {
     const newQuestion = {
       name: "",
       description: "",
-      sortOrder: 1,
+      //   sortOrder: 1,
+      sortOrder: this.state.quiz.questions.length + 1,
       options: [],
       correctValues: [],
     };
@@ -52,6 +53,10 @@ class QuizEditor extends React.Component {
   };
 
   exportJSON = () => {
+    if(this.state.quiz.name.trim() === ""|| this.state.quiz.description.trim() === ""){
+      alert("Please fill Quiz Name and Description before exporting");
+      return;
+    }
     const dataStr =
       "data:text/json;charset=utf-8," +
       encodeURIComponent(JSON.stringify(this.state.quiz, null, 2));
@@ -130,14 +135,16 @@ class QuizEditor extends React.Component {
           <br />
           <button onClick={this.addQuestion}>Add Question</button>
         </div>
-        <div className="card">
-          <button onClick={this.exportJSON} style={{ marginBottom: "10px" }}>
-            Export JSON
-          </button>
-        </div>
-        <div className="card">
-          <h4>Import JSON</h4>
-          <input type="file" accept=".json" onChange={this.handleImport} />
+        <div className="card export-import-section">
+          <div>
+            <button onClick={this.exportJSON} style={{ marginBottom: "10px" }}>
+              Export JSON
+            </button>
+          </div>
+          <div>
+            <h4>Import JSON</h4>
+            <input type="file" accept=".json" onChange={this.handleImport} />
+          </div>
         </div>
       </div>
     );
