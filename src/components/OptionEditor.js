@@ -6,7 +6,8 @@ class OptionEditor extends React.Component {
       ...this.props.option,
       [name]: value,
     };
-    this.props.onChange(option);
+    let { correctValues } = this.props;
+    this.props.onChange(option, correctValues);
   };
 
   handleValueChange = (e, beforeValue) => {
@@ -18,14 +19,12 @@ class OptionEditor extends React.Component {
     };
 
     //xoa neu la correct value cua option do
-    let {correctValues } = this.props;
+    let { correctValues } = this.props;
 
     if (correctValues?.includes(beforeValue)) {
-      correctValues = correctValues.filter(
-        (v) => v !== beforeValue
-      );
+      correctValues = correctValues.filter((v) => v !== beforeValue);
     }
-    this.props.onChange(option,correctValues);
+    this.props.onChange(option, correctValues);
   };
 
   handleCorrectChange = (e, beforeValue) => {
@@ -33,14 +32,14 @@ class OptionEditor extends React.Component {
     this.props.onToggleCorrect(value, checked, beforeValue);
   };
   render() {
-    const { option, isCorrect,beforeValue } = this.props;
+    const { option, isCorrect, beforeValue } = this.props;
     return (
       <div className={`option-row ${isCorrect ? "correct" : ""}`}>
         <input
           type="checkbox"
           value={option.value}
           checked={isCorrect}
-          onChange={(e)=>this.handleCorrectChange(e, beforeValue)}
+          onChange={(e) => this.handleCorrectChange(e, beforeValue)}
           disabled={option.value === ""}
         />
         <input
@@ -48,7 +47,7 @@ class OptionEditor extends React.Component {
           placeholder="Value option"
           value={option.value}
           //   onChange={this.handleChange}
-          onChange={(e) => this.handleValueChange(e,beforeValue)}
+          onChange={(e) => this.handleValueChange(e, beforeValue)}
         />
         <input
           name="label"
